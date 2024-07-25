@@ -25,7 +25,14 @@ const pool = require("./db");
 
 app.use(
   cors({
-    origin: `https://ratemyclub-frontend-production.up.railway.app`,
+    origin: `https://ratemyclub-frontend-production.up.railway.app/`,
+    credentials: true,
+  }),
+);
+
+app.use(
+  cors({
+    origin: `http://localhost:5173`,
     credentials: true,
   }),
 );
