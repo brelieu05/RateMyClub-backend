@@ -100,5 +100,37 @@ clubRoutes.get('/universities/:university/clubs', async (req, res) => {
     }
   });
 
+  clubRoutes.patch('/:club_id', async (req, res) => {
+    try {
+        const { club_id } = req.params;
+        const { club_size, club_type, meeting_days, photos } = req.body;
+
+        let query;
+        let values;
+
+        if (photos !== null && photos !== undefined) {
+            query = "UPDATE clubs SET club_type = $1, club_size = $2, meeting_days = $3, photos = $4 WHERE club_id = $5 RETURNING *";
+            values = [club_type, club_size, meeting_days, photos, club_id];
+        } else {
+            query = "UPDATE clubs SET club_type = $1, club_size = $2, meeting_days = $3 WHERE club_id = $4 RETURNING *";
+            values = [club_type, club_size, meeting_days, club_id];
+        }
+
+        const updatedClub = await pool.query(query, values);
+    
+        if (updatedClub.rows.length === 0) {
+            return res.status(404).send("Club not found");
+        }
+    
+        res.json(updatedClub.rows[0]);
+    } catch (err) {
+        console.error("Error updating club:", err.message);
+        res.status(500).send("Failed to update club");
+    }
+});
+
+  
+  
+
 
 module.exports = clubRoutes;

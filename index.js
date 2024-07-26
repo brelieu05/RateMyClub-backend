@@ -15,14 +15,6 @@ const pool = require("./db");
 // app.use(cors());
 // app.use(express.json());
 
-
-// app.use(
-//     cors({
-//       origin: `https://main.d2kqabl7ms9fg4.amplifyapp.com`,
-//       credentials: true,
-//     }),
-//   );
-
 app.use(
   cors({
     origin: `https://ratemyclub-frontend-production.up.railway.app`,
