@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+require('dotenv').config();
 
 const clubRouter = require('./routes/clubRoutes');
 const reviewsRouter = require('./routes/reviewsRoute');
@@ -45,6 +46,7 @@ app.use(
   "/api/uploadthing",
   createRouteHandler({
     router: uploadRouter
+    
   }),
 );
 
