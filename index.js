@@ -44,15 +44,9 @@ app.use('/universities', universityRouter);
 app.use('/reports', reportsRouter);
 app.use('/user', userRouter)
 
-app.get("/api/get-secret", (req, res) => {
-  res.json({ secret: process.env.UPLOADTHING_SECRET });
-});
-
 app.use(
   "/api/uploadthing",
   createRouteHandler({
-    uploadthingSecret: process.env.UPLOADTHING_SECRET,
-    uploadthingId: process.env.UPLOADTHING_APP_ID,
     router: uploadRouter
   }),
 );
