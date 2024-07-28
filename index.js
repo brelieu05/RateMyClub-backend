@@ -22,19 +22,20 @@ const pool = require("./db");
 // app.use(cors());
 // app.use(express.json());
 
+// app.use(
+//   cors({
+//     origin: `https://ratemyclub-frontend-production.up.railway.app`,
+//     credentials: true,
+//   }),
+// );
+
 app.use(
   cors({
-    origin: `https://ratemyclub-frontend-production.up.railway.app`,
+    origin: `http://ratemyclub.org`,
     credentials: true,
   }),
 );
 
-// app.use(
-//   cors({
-//     origin: `http://localhost:4173`,
-//     credentials: true,
-//   }),
-// );
 
 
 
