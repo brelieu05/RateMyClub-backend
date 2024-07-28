@@ -31,7 +31,7 @@ const pool = require("./db");
 
 app.use(
   cors({
-    origin: `http://ratemyclub.org`,
+    origin: `https://ratemyclub.org`,
     credentials: true,
   }),
 );
