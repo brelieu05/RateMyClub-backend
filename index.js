@@ -1,7 +1,8 @@
+require('dotenv').config();
+
 const express = require("express");
 const cors = require("cors");
 
-require('dotenv').config();
 
 const clubRouter = require('./routes/clubRoutes');
 const reviewsRouter = require('./routes/reviewsRoute');
@@ -30,7 +31,7 @@ app.use(
 
 // app.use(
 //   cors({
-//     origin: `http://localhost:5173`,
+//     origin: `http://localhost:4173`,
 //     credentials: true,
 //   }),
 // );
@@ -42,6 +43,10 @@ app.use('/reviews', reviewsRouter);
 app.use('/universities', universityRouter);
 app.use('/reports', reportsRouter);
 app.use('/user', userRouter)
+
+app.get("/api/get-secret", (req, res) => {
+  res.json({ secret: process.env.UPLOADTHING_KEY });
+});
 
 app.use(
   "/api/uploadthing",
