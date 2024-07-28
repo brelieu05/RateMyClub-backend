@@ -8,7 +8,6 @@ photoRouter.use(express.json());
 
 const f = createUploadthing();
 
-console.log("in uploadthing");
 
 const uploadRouter = {
   imageUploader: f({

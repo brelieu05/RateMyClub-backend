@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+
 require('dotenv').config();
 
 const clubRouter = require('./routes/clubRoutes');
@@ -45,11 +46,10 @@ app.use('/user', userRouter)
 app.use(
   "/api/uploadthing",
   createRouteHandler({
+    uploadthingSecret : process.env.UPLOADTHING_SECRET,
     router: uploadRouter
-    
   }),
 );
-
 
 app.listen(port, () => {
     console.log(`server has started on port ${port}`)
