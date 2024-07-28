@@ -129,6 +129,20 @@ clubRoutes.get('/universities/:university/clubs', async (req, res) => {
     }
 });
 
+// clubRoutes.get("/top", async (req, res) => {
+//     try {
+//         const club = await pool.query(
+//             "SELECT * FROM clubs WHERE club_id = ($1)",
+//             [club_id]
+//         );
+//         res.json(club.rows)
+//     }
+//     catch (err) {
+//         console.log(err);
+//     }
+// })
+
+
   
   
 
