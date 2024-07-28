@@ -46,10 +46,12 @@ app.use('/user', userRouter)
 app.use(
   "/api/uploadthing",
   createRouteHandler({
-    uploadthingSecret : process.env.UPLOADTHING_SECRET,
+    uploadthingSecret: process.env.UPLOADTHING_SECRET,
+    uploadthingId: process.env.UPLOADTHING_APP_ID,
     router: uploadRouter
   }),
 );
+
 
 app.listen(port, () => {
     console.log(`server has started on port ${port}`)
