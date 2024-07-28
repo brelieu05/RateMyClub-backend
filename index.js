@@ -45,7 +45,7 @@ app.use('/reports', reportsRouter);
 app.use('/user', userRouter)
 
 app.get("/api/get-secret", (req, res) => {
-  res.json({ secret: process.env.UPLOADTHING_KEY });
+  res.json({ secret: process.env.UPLOADTHING_SECRET });
 });
 
 app.use(
