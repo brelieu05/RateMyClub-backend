@@ -19,7 +19,7 @@ const pool = require("./db");
 // Middleware
 app.use(
   cors({
-    origin: `https://ratemyclub.org/`,
+    origin: `https://ratemyclub.org`,
     credentials: true,
   })
 );
