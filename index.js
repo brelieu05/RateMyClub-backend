@@ -29,12 +29,20 @@ const pool = require("./db");
 //   }),
 // );
 
+// app.use(
+//   cors({
+//     origin: `https://ratemyclub.org`,
+//     credentials: true,
+//   }),
+// );
+
 app.use(
   cors({
-    origin: `https://ratemyclub.org`,
+    origin: `http://localhost:5173`,
     credentials: true,
   }),
 );
+
 
 
 
