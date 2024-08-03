@@ -5,8 +5,7 @@ CREATE TABLE clubs(
     club_size VARCHAR(64),
     university VARCHAR(128),
     uni_abbr VARCHAR(8),
-    photos VARCHAR[] DEFAULT {},
-    meeting_days VARCHAR[] DEFAULT {},
+    photos TEXT[] DEFAULT ARRAY[]::TEXT[],
+    meeting_days TEXT[] DEFAULT ARRAY[]::TEXT[],
     disclaimer VARCHAR(256)
-
 );

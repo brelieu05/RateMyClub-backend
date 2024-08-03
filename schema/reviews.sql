@@ -9,5 +9,5 @@ CREATE TABLE reviews(
     university VARCHAR(128),
     club_id INT,
     FOREIGN KEY (club_id) REFERENCES clubs (club_id),
-    is_reported INT,
+    num_reports INT
 );
