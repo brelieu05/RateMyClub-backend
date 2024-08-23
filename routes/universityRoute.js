@@ -10,11 +10,12 @@ universityRouter.use(express.json());
 universityRouter.get("/", async (req, res) => {
     try {
         const result = await pool.query(
-            "SELECT DISTINCT university, uni_abbr FROM clubs WHERE university IS NOT NULL"
+            "SELECT DISTINCT ON (university, uni_abbr) university, uni_abbr, MIN(club_id) AS club_id FROM clubs WHERE university IS NOT NULL GROUP BY university, uni_abbr"
         );
         const universities = result.rows.map(row => ({
             university: row.university,
-            uni_abbr: row.uni_abbr
+            uni_abbr: row.uni_abbr,
+            club_id: row.club_id,
         }));
         res.json(universities);
     } catch (err) {

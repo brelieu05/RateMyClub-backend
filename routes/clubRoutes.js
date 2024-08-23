@@ -34,9 +34,10 @@ clubRoutes.get("/", async (req, res) => {
 //     }
 // })
 
+//TODO need to fix
 clubRoutes.post("/", async (req, res) => {
     try {
-        const { club_name, club_type, club_size, university, uni_abbr } = req.body;
+        const { club_name, university, uni_abbr, tags } = req.body;
 
         // Check if the club already exists
         const existingClub = await pool.query(
@@ -48,8 +49,8 @@ clubRoutes.post("/", async (req, res) => {
             res.json(existingClub.rows[0]);
         } else {
             const newClub = await pool.query(
-                "INSERT INTO clubs (club_name, club_type, club_size, university, uni_abbr) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-                [club_name, club_type, club_size, university, uni_abbr]
+                "INSERT INTO clubs (club_name, university, uni_abbr, tags) VALUES ($1, $2, $3, $4) RETURNING *",
+                [club_name, university, uni_abbr, tags]
             );
             res.json(newClub.rows[0]);
         }
@@ -73,6 +74,7 @@ clubRoutes.get("/:club_id", async (req, res) => {
     }
 })
 
+// TODO need to fix, remove club_name
 clubRoutes.get('/universities/:university/clubs', async (req, res) => {
     const { university } = req.params;
     const { clubType, clubSize } = req.query;
@@ -103,17 +105,18 @@ clubRoutes.get('/universities/:university/clubs', async (req, res) => {
   clubRoutes.patch('/:club_id', async (req, res) => {
     try {
         const { club_id } = req.params;
-        const { club_size, club_type, meeting_days, photos } = req.body;
+        const { meeting_days, photos } = req.body;
 
         let query;
         let values;
+        
 
-        if (photos !== null && photos !== undefined) {
-            query = "UPDATE clubs SET club_type = $1, club_size = $2, meeting_days = $3, photos = $4 WHERE club_id = $5 RETURNING *";
-            values = [club_type, club_size, meeting_days, photos, club_id];
+        if (photos !== null && photos.length !== 0) {
+            query = "UPDATE clubs SET meeting_days = $1, photos = $2 WHERE club_id = $3 RETURNING *";
+            values = [meeting_days, photos, club_id];
         } else {
-            query = "UPDATE clubs SET club_type = $1, club_size = $2, meeting_days = $3 WHERE club_id = $4 RETURNING *";
-            values = [club_type, club_size, meeting_days, club_id];
+            query = "UPDATE clubs SET meeting_days = $1 WHERE club_id = $2 RETURNING *";
+            values = [meeting_days, club_id];
         }
 
         const updatedClub = await pool.query(query, values);

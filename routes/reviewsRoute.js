@@ -6,13 +6,12 @@ const pool = require('../db');
 
 reviewsRoute.use(express.json());
 
-// description = ($1)
 reviewsRoute.post("/", async (req, res) => {
     try {
-        const { description, club_name, rating, university, club_id} = req.body;  
+        const { description, rating, club_id} = req.body;  
         const newReview = await pool.query(
-            "INSERT INTO reviews (description, club_name, rating, university, club_id) VALUES($1, $2, $3, $4, $5) RETURNING *",
-            [description, club_name, rating, university, club_id]  
+            "INSERT INTO reviews (description, rating, club_id) VALUES($1, $2, $3) RETURNING *",
+            [description, rating, club_id]  
         );
         res.json(newReview.rows[0]);
     }
@@ -31,14 +30,14 @@ reviewsRoute.get("/", async (req, res) => {
         console.log(err.message);
     }
 })
-
-reviewsRoute.get("/:university/:club_name/reviews", async (req, res) => {
-    const { university, club_name } = req.params;
+// reviewsRoute.get("/:university/:club_name/reviews", async (req, res) => {
+reviewsRoute.get("/:club_id/", async (req, res) => {
+    const { club_id } = req.params;
 
     try {
         const reviews = await pool.query(
-            "SELECT * FROM reviews WHERE university = ($1) AND club_name = ($2)",
-            [university, club_name]
+            "SELECT * FROM reviews WHERE club_id = ($1)",
+            [club_id]
         );
         res.json(reviews.rows)
     }
@@ -68,7 +67,7 @@ reviewsRoute.delete("/:review_id", async (req, res) => {
     }
 });
 
-reviewsRoute.get("/:review_id", async (req, res) => {
+reviewsRoute.get("/id/:review_id", async (req, res) => {
     const { review_id } = req.params;
 
     try {
