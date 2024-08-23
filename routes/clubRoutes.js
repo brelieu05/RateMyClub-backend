@@ -105,18 +105,18 @@ clubRoutes.get('/universities/:university/clubs', async (req, res) => {
   clubRoutes.patch('/:club_id', async (req, res) => {
     try {
         const { club_id } = req.params;
-        const { meeting_days, photos } = req.body;
+        const { meeting_days, photos, tags } = req.body;
 
         let query;
         let values;
         
 
         if (photos !== null && photos.length !== 0) {
-            query = "UPDATE clubs SET meeting_days = $1, photos = $2 WHERE club_id = $3 RETURNING *";
-            values = [meeting_days, photos, club_id];
+            query = "UPDATE clubs SET meeting_days = $1, tags = $2, photos = $3 WHERE club_id = $4 RETURNING *";
+            values = [meeting_days, tags, photos, club_id];
         } else {
-            query = "UPDATE clubs SET meeting_days = $1 WHERE club_id = $2 RETURNING *";
-            values = [meeting_days, club_id];
+            query = "UPDATE clubs SET meeting_days = $1, tags = $2 WHERE club_id = $3 RETURNING *";
+            values = [meeting_days, tags, club_id];
         }
 
         const updatedClub = await pool.query(query, values);
