@@ -25,11 +25,11 @@ app.use(
 );
 
 // Apply the verifyToken middleware to protect your routes
-app.use('/clubs', verifyToken, clubRouter);
-app.use('/reviews', verifyToken, reviewsRouter);
-app.use('/universities', verifyToken, universityRouter);
-app.use('/reports', verifyToken, reportsRouter);
-app.use('/user', verifyToken, userRouter);
+app.use('/clubs', clubRouter);
+app.use('/reviews', reviewsRouter);
+app.use('/universities', universityRouter);
+app.use('/reports', reportsRouter);
+app.use('/user', userRouter);
 
 app.use(
   "/api/uploadthing",
