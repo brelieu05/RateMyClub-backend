@@ -13,13 +13,13 @@ const { uploadRouter } = require("./routes/uploadthing");
 const verifyToken = require('./verifyToken');
 
 const app = express();
-const port = 5000;
+const port = 5001;
 const pool = require("./db");
 
 // Middleware
 app.use(
   cors({
-    origin: `https://ratemyclub-frontend-production.up.railway.app/`,
+    origin: `https://ratemyclub-frontend-production.up.railway.app`,
     credentials: true,
   })
 );
