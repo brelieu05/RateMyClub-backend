@@ -13,7 +13,7 @@ const { uploadRouter } = require("./routes/uploadthing");
 const verifyToken = require('./verifyToken');
 
 const app = express();
-const port = 5432;
+const port = 8080;
 const pool = require("./db");
 
 // Middleware
